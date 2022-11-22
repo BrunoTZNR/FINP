@@ -104,7 +104,9 @@
     </div>
 
     <div class="card acoes">
-
+      <a class="button" href="./../../home.php">voltar</a>
+      <a class="button" href="#update">editar</a>
+      <a class="button" href="#delete">excluir usuário</a>
     </div>
   </section>
 </main>

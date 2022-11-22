@@ -1,1 +1,25 @@
 @use './../globals/mixins' as *;
+
+button, input[type="submit"]{
+  transition-property: color, background-color, box-shadow;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+}
+
+a.button, button.button{
+  padding: .5rem 1rem;
+  border-radius: .2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  cursor: pointer;
+  background-color: var(--color-5);
+  color: var(--text-light);
+
+  &:hover, &:focus{
+    background-color: var(--color-8);
+    box-shadow: 2px 2px 3px var(--color-9);
+    // color: var(--text-1-l);
+  }
+}

@@ -38,7 +38,6 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  outline: 1px solid red;
 }
 
 body {
@@ -68,7 +67,7 @@ a {
   text-decoration: none;
   font-size: 1rem;
   color: inherit;
-  transition-property: color, background-color;
+  transition-property: color, background-color, box-shadow;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
 }
@@ -223,6 +222,28 @@ span.footer_year {
   grid-area: acoes;
 }
 
+button, input[type=submit] {
+  transition-property: color, background-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+a.button, button.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  cursor: pointer;
+  background-color: var(--color-5);
+  color: var(--text-light);
+}
+a.button:hover, a.button:focus, button.button:hover, button.button:focus {
+  background-color: var(--color-8);
+  box-shadow: 2px 2px 3px var(--color-9);
+}
+
 .home_container .card {
   background-color: var(--color-6);
   border-radius: 0.5rem;
@@ -247,4 +268,8 @@ span.footer_year {
   padding: 0.3rem 0.7rem;
   border-radius: 0.3rem;
   background-color: var(--color-5);
+}
+.profile_container .acoes {
+  flex-direction: row;
+  gap: 0 1rem;
 }/*# sourceMappingURL=style.css.map */
