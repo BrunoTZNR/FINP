@@ -1,0 +1,26 @@
+:root{
+  --color-1: #AA888D;
+  --color-2: #926369;
+  --color-3: #7E4E54;
+  --color-4: #A0404D;
+  --color-5: #A62637;
+  --color-6: #7E2633;
+  --color-7: #501620;
+  --color-8: #310C13;
+  --color-9: #110305;
+
+  --text-light: #f0f0f0;
+  --text-dark: #d4d4d4;
+}
+
+@media (prefers-color-scheme: dark) {
+  body{
+    --bg-color: var(--color-7);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body{
+    --bg-color: var(--color-4);
+  }
+}

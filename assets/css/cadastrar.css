@@ -1,0 +1,274 @@
+@import url('./main_style.css');
+
+/* CADASTRO - SECTION */
+.cadastro_container{
+    width: 900px;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* ------------------ */
+
+/* FORM - CONTAINER */
+.form_cadastro{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    row-gap: 10px;
+    padding: 35px 10px;
+    background: var(--text-light);
+}
+
+.cad_title{
+    color: var(--sec-2-strong);
+    text-align: center;
+    padding: 5px 0;
+}
+/* ---------------- */
+
+/* CAD USER - CONTAINER */
+.cad_container{
+    height: 400px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.div_section{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.div_section_compost{
+    display: flex;
+    justify-content: space-between;
+}
+/* -------------------- */
+
+/* FORM - CONTAINER */
+.form_container{
+    width: 345px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 15px;
+}
+
+.input_container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.error{
+    position: absolute;
+    bottom: -14px;
+    right: 0;
+    font-size: .7rem;
+    font-style: italic;
+    color: red;
+}
+
+.error_input{
+    border-color: red;
+}
+/* ---------------------- */
+
+/* LABELS AND INPUTS */
+input[type="submit"]{
+    outline: none;
+    border: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+#sexo, #estado{
+    height: 31px;
+    border: 1px solid var(--sec-2);
+    outline: none;
+    padding: 6px 8px;
+    background: var(--text-light);
+}
+
+#numero{
+    width: 72px;
+}
+
+#complemento{
+    width: 260px;
+}
+
+input[type="date"]{
+    text-align: end;
+    padding-right: 25px;
+    position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator{
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+#sexo:focus, #estado:focus,
+
+input[type="text"]:valid,
+input[type="email"]:valid,
+input[type="password"]:valid,
+input[type="date"]:valid,
+#sexo:valid, #estado:valid{
+    border-color: var(--sec-2-strong);
+}
+
+.label_input{
+    position: absolute;
+    left: 5px;
+    bottom: 50%;
+    transform: translateY(50%);
+    color: var(--sec-1);
+    transition: .25s ease;
+    padding: 0 2px;
+}
+
+.ident_label{
+    text-align: center;
+    color: var(--sec-2-strong);
+}
+
+#nome:focus ~ .nome_label,
+#sobrenome:focus ~ .sobrenome_label,
+#email:focus ~ .email_label,
+#telefone:focus ~ .telefone_label,
+#senha:focus ~ .senha_label,
+#repete_senha:focus ~ .repete_senha_label,
+#cpf:focus ~ .cpf_label,
+#cnpj:focus ~ .cnpj_label,
+#nm_empresa:focus ~ .nm_empresa_label,
+#dt_nasc:focus ~ .dt_nasc_label,
+#sexo:focus ~ .sexo_label,
+#cep:focus ~ .cep_label,
+#rua:focus ~ .rua_label,
+#bairro:focus ~ .bairro_label,
+#numero:focus ~ .numero_label,
+#complemento:focus ~ .complemento_label,
+#cidade:focus ~ .cidade_label,
+#estado:focus ~ .estado_label,
+
+#nome:valid ~ .nome_label,
+#sobrenome:valid ~ .sobrenome_label,
+#email:valid ~ .email_label,
+#telefone:valid ~ .telefone_label,
+#senha:valid ~ .senha_label,
+#repete_senha:valid ~ .repete_senha_label,
+#cpf:valid ~ .cpf_label,
+#cnpj:valid ~ .cnpj_label,
+#nm_empresa:valid ~ .nm_empresa_label,
+#dt_nasc:valid ~ .dt_nasc_label,
+#sexo:valid ~ .sexo_label,
+#cep:valid ~ .cep_label,
+#rua:valid ~ .rua_label,
+#bairro:valid ~ .bairro_label,
+#numero:valid ~ .numero_label,
+#complemento:valid ~ .complemento_label,
+#cidade:valid ~ .cidade_label,
+#estado:valid ~ .estado_label{
+    transform: translateY(-50%);
+    background: var(--text-light);
+    color: var(--sec-2);
+    font-size: .85rem;
+    z-index: 5;
+}
+
+.ativado{
+    transform: translateY(-50%);
+    background: var(--text-light);
+    color: #ff0000;
+    font-size: .85rem;
+    z-index: 5;
+}
+/* ----------------- */
+
+/* CAD_PESSOA PJ-PF - CONTAINER */
+#pf, #pj{
+    display: none;
+}
+
+.tipo_title_container{
+    display: flex;
+    column-gap: 1rem;
+    justify-content: center;
+}
+
+.pj_container article:nth-child(1){
+    margin-bottom: 15px;
+}
+
+.label_tipo{
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: var(--sec-1);
+    background: var(--sec-2);
+    cursor: pointer;
+    font-weight: 500;
+    transition: color .2s ease;
+}
+
+.label_tipo:hover,
+#pf:checked ~ .pf,
+#pj:checked ~ .pj{
+    color: var(--text-light);
+}
+/* ---------------------------- */
+
+/* ENVIO - CONTAINER */
+.enviar_container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.enviar_container a,
+input[type="submit"]{
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.enviar_container a,
+.enviar_container i,
+input[type="submit"]{
+    width: 150px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sec-2);
+    border-radius: 5px;
+    color: var(--text-light);
+    border: 2px solid var(--sec-2);
+    transition: all .15s ease-in;
+    cursor: pointer;
+}
+
+.enviar_container a:hover,
+.enviar_container i:hover,
+input[type="submit"]:hover{
+    background: var(--text-light);
+    color: var(--sec-2-strong);
+    border-color: var(--sec-2-strong);
+}
+/* ----------------- */

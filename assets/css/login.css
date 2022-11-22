@@ -1,0 +1,244 @@
+@import url('./main_style.css');
+
+/* LOGIN - SECTION */
+section.login_container{
+    width: 580px;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* --------------- */
+
+/* ERRO LOGIN */
+span.span_erro_login{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    padding: 10px 50px;
+    top: 10%;
+    background: var(--light);
+    transition: .5s ease-out;
+}
+
+p.p_erro_login{
+    color: var(--sec-2);
+}
+
+a.reenvio_confirmao_email{
+    padding: 4px 8px;
+    display: block;
+    outline: none;
+    border: 1px solid var(--sec-2);
+    color: var(--sec-2);
+}
+
+a.reenvio_confirmao_email:hover{
+    background: var(--sec-2);
+    color: var(--text-light);
+}
+/* ---------- */
+
+/* LOGIN - FORM */
+.form_login{
+    width: 70%;
+    padding: 35px 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 18px;
+    background: var(--light);
+}
+
+.form_login h1{
+    margin-bottom: 15px;
+    color: var(--sec-2-strong);
+    text-align: center;
+    padding: 5px 0;
+}
+/* ------------ */
+
+/* INPUTS - CONTAINER */
+.input_container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"]{
+    border: 1px solid var(--sec-2);
+    background: var(--light);
+    outline: none;
+    padding: 5px 8px;
+}
+
+.login_label{
+    position: absolute;
+    left: 5px;
+    bottom: 50%;
+    transform: translateY(50%);
+    padding: 0 2px;
+    color: var(--sec-1);
+    transition: .25s ease;
+}
+
+.cadeado{
+    position: absolute;
+    right: 5px;
+    bottom: 50%;
+    transform: translateY(50%);
+    padding: 0 2px;
+    color: var(--sec-1);
+    transition: .25s ease;
+    cursor: pointer;
+}
+
+#email:focus ~ .email_label,
+#senha:focus ~ .senha_label,
+#senha:valid ~ .senha_label,
+.email_focus,
+.ativado_error{
+    transform: translateY(-50%);
+    background: var(--light);
+    font-size: .85rem;
+    z-index: 5;
+}
+
+#senha:focus ~ .senha_label,
+#senha:valid ~ .senha_label,
+.email_focus{
+    color: var(--sec-2);
+}
+
+.ativado_error{
+    color: #ff0000;
+}
+
+.error{
+    position: absolute;
+    bottom: -14px;
+    right: 0;
+    font-size: .7rem;
+    font-style: italic;
+    color: red;
+}
+/* ------------------ */
+
+/* REMEMBER FORGOT */
+.remember_forgot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6px;
+}
+
+.remember_forgot div{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    column-gap: 5px;
+}
+
+div.remember_forgot a,
+div.remember_forgot label{
+    transition: .15s ease-in;
+    outline: none;
+    font-size: .92rem;
+    cursor: pointer;
+    color: var(--sec-2);
+}
+
+div.remember_forgot a:hover{
+    color: var(--sec-2-strong);
+}
+
+input[type="checkbox"]{
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: .15s ease-in;
+    background: var(--sec-1);
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="checkbox"]:hover{
+    background: var(--sec-2);
+}
+
+input[type="checkbox"]::after{
+    font-family: "Font Awesome 6 Free";
+    font-weight: bolder;
+    font-size: .55rem;
+    content: '\f00c';
+    color: var(--text-light);
+    display: none;
+}
+
+input[type="checkbox"]:checked{
+    background: var(--sec-2-strong);
+}
+
+input[type="checkbox"]:checked::after{
+    display: block;
+}
+/* --------------- */
+
+/* ENTRAR */
+.entrar{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.entrar a{
+    color: var(--sec-2);
+    display: block;
+    font-size: .90rem;
+    outline: none;
+    padding: 5px 8px;
+    text-transform: uppercase;
+    background: var(--light);
+}
+
+.entrar a:hover{
+    color: var(--sec-2-strong);
+}
+
+input[type="submit"]{
+    display: block;
+    padding: 5px 16px;
+    font-size: .80rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-light);
+    transition: .2s ease-in;
+    cursor: pointer;
+    background: var(--sec-1);
+    border: none;
+}
+
+input[type="submit"]:hover{
+    color: var(--sec-2-strong);
+    box-shadow: 1px 1px 2px var(--sec-1);
+}
+/* ------ */
+
+/* LOGIN - FOOTER */
+p.footer_login{
+    font-size: .80rem;
+    color: var(--sec-1);
+    position: absolute;
+    bottom: 5px;
+}
+/* -------------- */

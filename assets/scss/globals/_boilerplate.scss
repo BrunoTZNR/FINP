@@ -1,0 +1,22 @@
+html{
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+
+  outline: 1px solid red;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  font-family: var(--title-font);
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+}

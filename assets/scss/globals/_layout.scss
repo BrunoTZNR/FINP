@@ -1,0 +1,132 @@
+@use './mixins' as *;
+
+.header, .footer{
+  width: 100%;
+  background-color: var(--color-8);
+  height: 70px;
+  @include flex-center;
+  color: var(--text-dark);
+}
+
+.header{
+  &_container{
+    max-width: 1080px;
+    width: 100%;
+
+    ul{
+      display: flex;
+      list-style: none;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+
+      li{
+        &.header_user{
+          padding: .5rem .4rem;
+          border-radius: 50%;
+          background-color: var(--text-dark);
+          color: var(--color-8);
+          position: relative;
+
+          ul{
+            height: 90px;
+            width: 90px;
+            background-color: var(--text-dark);
+            position: absolute;
+            bottom: -90px;
+            left: 0;
+            display: none;
+            row-gap: .75rem;
+            border-radius: 0 .5rem .5rem .5rem;
+
+            li{
+              width: 100%;
+            }
+          }
+
+          &:hover{
+            border-radius: 50% 50% 0 0;
+
+            ul{
+              @include flex-center-column;
+            }
+          }
+        }
+
+        &.header_bao{
+          i{
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.home{
+  @include main-container;
+
+  &_container{
+    @include container;
+
+    display: grid;
+    grid: "boleto meta cartao" 1fr
+          "cheque meta investimento" 1fr
+          / minmax(200px, .8fr) minmax(350px, 1fr) minmax(200px, .8fr);
+    gap: 1rem;
+
+    & .boleto{
+      grid-area: boleto;
+      // background-color: red;
+    }
+
+    & .cheque{
+      grid-area: cheque;
+      // background-color: green;
+    }
+
+    & .meta{
+      grid-area: meta;
+      // background-color: pink;
+    }
+
+    & .cartao{
+      grid-area: cartao;
+      // background-color: yellow;
+    }
+
+    & .investimento{
+      grid-area: investimento;
+      // background-color: blue;
+    }
+  }
+}
+
+.profile {
+  @include main-container;
+
+  &_container{
+    @include container;
+    display: grid;
+    grid: "dados endereco" 1fr
+          "dados endereco" 1fr
+          "acoes acoes" 100px
+          / 1fr 1fr;
+    gap: 1rem;
+
+    & .dados{
+      grid-area: dados;
+      // background-color: green;
+    }
+
+    & .endereco{
+      grid-area: endereco;
+      // background-color: orangered;
+    }
+
+    & .acoes{
+      grid-area: acoes;
+      // background-color: red;
+    }
+  }
+}

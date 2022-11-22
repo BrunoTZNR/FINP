@@ -1,0 +1,10 @@
+@use './../globals/mixins' as *;
+
+.home{
+  &_container{
+    & .card{
+      background-color: var(--color-6);
+      border-radius: .5rem;
+    }
+  }
+}

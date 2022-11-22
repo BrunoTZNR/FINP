@@ -1,0 +1,23 @@
+@use './../globals/mixins' as *;
+
+
+.profile_container {
+  & .card {
+    height: 100%;
+    background-color: var(--color-6);
+    border-radius: .5rem;
+    padding: 1rem;
+    @include flex-center-column;
+    row-gap: .9rem;
+
+    article {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .3rem .7rem;
+      border-radius: .3rem;
+      background-color: var(--color-5);
+    }
+  }
+}
