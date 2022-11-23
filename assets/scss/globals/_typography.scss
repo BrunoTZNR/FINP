@@ -2,20 +2,25 @@
 
 h3{
   &.card_title{
-    text-align: center;
+    height: 35px;
+    @include flex-center;
     color: var(--text-light);
-    padding: .3rem 0;
     border-radius: .5rem .5rem 0 0;
     background-color: var(--color-4);
+  }
 
-    &::first-letter{
-      text-transform: uppercase;
-    }
+  &.profile_card_title{
+    text-align: center;
+    color: var(--text-light);
+    position: absolute;
+    top: 16px;
   }
 }
 
 h4{
   &.profile_title{
+    width: 35%;
+    padding: .3rem .7rem;
     color: var(--color-9);
   }
 }
@@ -66,7 +71,22 @@ p{
   }
 
   &.profile_text{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: .7rem;
+    border-radius: 0 .3rem .3rem 0;
+    transition: background-color .2s ease-in-out;
     color: var(--text-dark);
+
+    &:hover{
+      background-color: var(--color-7);
+    }
   }
 }
 

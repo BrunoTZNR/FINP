@@ -2,9 +2,55 @@
 
 .home{
   &_container{
-    & .card{
+    .card{
       background-color: var(--color-6);
       border-radius: .5rem;
+    }
+
+    .meta{
+      display: flex;
+      flex-flow: column nowrap;
+
+      &_acoes{
+        @include flex-center;
+        column-gap: 4rem;
+        height: 35px;
+
+        span{
+          cursor: pointer;
+        }
+      }
+
+      &_carrosel{
+        flex-grow: 1;
+        display: flex;
+        overflow: hidden;
+        
+        .meta_carrosel_limit{
+          height: 100%;
+          display: flex;
+          transition: transform .75s ease-in-out;
+          transform: translateX(0);
+          
+          .content{
+            @include flex-center-column;
+            width: 100%;
+            border-radius: inherit;
+
+            &.a1{
+              background-color: pink;
+            }
+  
+            &.a2{
+              background-color: orangered;
+            }
+  
+            &.a3{
+              background-color: olivedrab;
+            }
+          }
+        }
+      }
     }
   }
 }

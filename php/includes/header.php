@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="<?=$css?>">
 
   <!-- JS -->
-  <script src="<?=$js?>" defer></script>
+  <?=$js?>
 
   <!-- FONTSAWESOME - LINK -->
   <script src="https://kit.fontawesome.com/ab587c5cd2.js" crossorigin="anonymous"></script>
@@ -21,7 +21,7 @@
 
   <title><?=TITLE?></title>
 </head>
-<body>
+<body <?php if(TITLE == 'PROFILE - UPDATE'){echo 'onload="alertView()"';}else{echo '';} ?>>
   <header class="header">
     <section class="header_container">
       <ul>

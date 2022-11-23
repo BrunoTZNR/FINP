@@ -45,21 +45,29 @@ body {
   height: 100%;
   font-family: var(--title-font);
   background-color: var(--bg-color);
+  position: relative;
   overflow-x: hidden;
 }
 
 h3.card_title {
-  text-align: center;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--text-light);
-  padding: 0.3rem 0;
   border-radius: 0.5rem 0.5rem 0 0;
   background-color: var(--color-4);
 }
-h3.card_title::first-letter {
-  text-transform: uppercase;
+h3.profile_card_title {
+  text-align: center;
+  color: var(--text-light);
+  position: absolute;
+  top: 16px;
 }
 
 h4.profile_title {
+  width: 35%;
+  padding: 0.3rem 0.7rem;
   color: var(--color-9);
 }
 
@@ -105,7 +113,21 @@ p.footer_text {
   color: var(--color-1);
 }
 p.profile_text {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 0.7rem;
+  border-radius: 0 0.3rem 0.3rem 0;
+  transition: background-color 0.2s ease-in-out;
   color: var(--text-dark);
+}
+p.profile_text:hover {
+  background-color: var(--color-7);
 }
 
 span.footer_year {
@@ -126,6 +148,7 @@ span.footer_year {
 .header_container {
   max-width: 1080px;
   width: 100%;
+  z-index: 5;
 }
 .header_container ul {
   display: flex;
@@ -209,7 +232,7 @@ span.footer_year {
   margin-inline: auto;
   padding: 1rem 0;
   display: grid;
-  grid: "dados endereco" 1fr "dados endereco" 1fr "acoes acoes" 100px/1fr 1fr;
+  grid: "dados endereco" 1fr "dados endereco" 1fr "acoes acoes" 80px/minmax(400px, 1fr) minmax(400px, 1fr);
   gap: 1rem;
 }
 .profile_container .dados {
@@ -222,31 +245,195 @@ span.footer_year {
   grid-area: acoes;
 }
 
+input,
+select {
+  width: 65%;
+  height: 100%;
+  font-family: var(--title-font);
+  font-size: 1rem;
+  border: 0;
+  outline: 0;
+  padding-right: 0.7rem;
+  text-align: center;
+  color: var(--text-dark);
+  background-color: inherit;
+  border-radius: 0 0.3rem 0.3rem 0;
+  transition: background-color 0.2s ease-in-out;
+}
+input[type=date],
+select[type=date] {
+  cursor: text;
+}
+input:hover, input:focus,
+select:hover,
+select:focus {
+  background-color: var(--color-7);
+}
+
+select {
+  cursor: pointer;
+}
+
 button, input[type=submit] {
+  border: none;
+  outline: none;
+  font-family: var(--title-font);
+  font-size: 1rem;
+  cursor: pointer;
   transition-property: color, background-color, box-shadow;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
 }
 
-a.button, button.button {
+.button {
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
   word-spacing: 2px;
-  cursor: pointer;
   background-color: var(--color-5);
   color: var(--text-light);
 }
-a.button:hover, a.button:focus, button.button:hover, button.button:focus {
+.button:hover, .button:focus {
   background-color: var(--color-8);
   box-shadow: 2px 2px 3px var(--color-9);
+}
+
+.alert {
+  opacity: 0;
+  pointer-events: none;
+  width: 290px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 4px solid var(--color-1);
+  position: absolute;
+  z-index: 10;
+  top: 85px;
+  right: 0;
+  transform: translateX(0);
+  transition: transform 0.75s ease-out;
+  color: var(--color-1);
+  background-color: var(--color-8);
+}
+
+#modal, #fade {
+  transition: 0.25s ease-in-out;
+  opacity: 1;
+  pointer-events: all; /* COM GATILHO DE EVENTOS COMO CLICK ETC */
+}
+#modal.hide, #fade.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#fade {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+#modal {
+  max-width: 550px;
+  width: 100%;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  padding: 2rem 0;
+  border-radius: 0.5rem;
+  background-color: var(--color-7);
+  z-index: 11;
+}
+#modal article {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+  padding: 0 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+#modal article h5 {
+  font-size: 1.15rem;
+}
+#modal article p {
+  text-align: center;
+  font-style: italic;
+}
+#modal div {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0 1.5rem;
+}
+
+#modal.hide {
+  top: 0;
 }
 
 .home_container .card {
   background-color: var(--color-6);
   border-radius: 0.5rem;
+}
+.home_container .meta {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.home_container .meta_acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -moz-column-gap: 4rem;
+       column-gap: 4rem;
+  height: 35px;
+}
+.home_container .meta_acoes span {
+  cursor: pointer;
+}
+.home_container .meta_carrosel {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+}
+.home_container .meta_carrosel .meta_carrosel_limit {
+  height: 100%;
+  display: flex;
+  transition: transform 0.75s ease-in-out;
+  transform: translateX(0);
+}
+.home_container .meta_carrosel .meta_carrosel_limit .content {
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: inherit;
+}
+.home_container .meta_carrosel .meta_carrosel_limit .content.a1 {
+  background-color: pink;
+}
+.home_container .meta_carrosel .meta_carrosel_limit .content.a2 {
+  background-color: orangered;
+}
+.home_container .meta_carrosel .meta_carrosel_limit .content.a3 {
+  background-color: olivedrab;
 }
 
 .profile_container .card {
@@ -258,18 +445,20 @@ a.button:hover, a.button:focus, button.button:hover, button.button:focus {
   flex-flow: nowrap column;
   justify-content: center;
   align-items: center;
+  justify-content: flex-end;
   row-gap: 0.9rem;
+  position: relative;
 }
 .profile_container .card article {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.3rem 0.7rem;
   border-radius: 0.3rem;
   background-color: var(--color-5);
 }
 .profile_container .acoes {
   flex-direction: row;
+  justify-content: center;
   gap: 0 1rem;
 }/*# sourceMappingURL=style.css.map */

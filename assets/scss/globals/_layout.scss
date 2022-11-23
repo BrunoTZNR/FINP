@@ -12,6 +12,7 @@
   &_container{
     max-width: 1080px;
     width: 100%;
+    z-index: 5;
 
     ul{
       display: flex;
@@ -110,8 +111,8 @@
     display: grid;
     grid: "dados endereco" 1fr
           "dados endereco" 1fr
-          "acoes acoes" 100px
-          / 1fr 1fr;
+          "acoes acoes" 80px
+          / minmax(400px, 1fr) minmax(400px, 1fr);
     gap: 1rem;
 
     & .dados{

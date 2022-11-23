@@ -8,6 +8,7 @@
     if(isset($_GET['invalid'])){$erro = "<span class='span_erro_login invalid'><p class='p_erro_login'>E-mail e/ou senha incorretos!</p></span>";}
     if(isset($_GET['confirm'])){$erro = "<span class='span_erro_login'><p class='p_erro_login'>Por favor confirmar E-mail</p><a href='' class='reenvio_confirmao_email'>Reenviar confirmação</a></span>";}
     if(isset($_GET['sucess'])){$erro = "<span class='span_erro_login invalid'><p class='p_erro_login'>Usuário cadastrado com sucesso!</p></span>";}
+    if(isset($_GET['delete'])){$erro = "<span class='span_erro_login invalid'><p class='p_erro_login'>Usuário deletado com sucesso!</p></span>";}
 
     //EXECUTA O MÉTODO CASO AS CONDIÇÕES ESTEJAM DE ACORDO
     if(isset($_POST['login']) && !empty($_POST['email']) && !empty($_POST['senha'])){

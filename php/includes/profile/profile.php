@@ -2,7 +2,7 @@
   require './../../db/conexao.php';
 
   $css = './../../../assets/css/style.css';
-  $js = './../../../assets/js/profile.js';
+  $js = '<script src="./../../../assets/js/profile.js" defer></script>';
   $logout = './../../logout.php';
   $home = './../../home.php';
   $perfil = './profile.php';
@@ -16,9 +16,24 @@
   $dados = viewUser($_SESSION['id_user']);
 ?>
 
+<section id="fade" class="hide"></section>
+<section id="modal" class="hide">
+  <article>
+    <h5>Tem certeza que quer deletar seu usuário?</h5>
+    <p><?=$dados[2]['nome']?></p>
+  </article>
+
+  <div>
+    <button class="button" id="close">Não</button>
+    <button class="button" id="delete">Sim</button>
+  </div>
+</section>
+
 <main class="profile">
   <section class="profile_container">
     <div class="card dados">
+      <h3 class="profile_card_title">Dados Pessoais</h3>
+
       <article>
         <h4 class="profile_title">Nome</h4>
         <p class="profile_text"><?=$dados[2]['nome']?></p>
@@ -66,6 +81,8 @@
     </div>
 
     <div class="card endereco">
+      <h3 class="profile_card_title">Endereço</h3>
+
       <article>
         <h4 class="profile_title">Cep</h4>
         <p class="mascara profile_text"><?=$dados[2]['cep']?></p>
@@ -105,8 +122,8 @@
 
     <div class="card acoes">
       <a class="button" href="./../../home.php">voltar</a>
-      <a class="button" href="#update">editar</a>
-      <a class="button" href="#delete">excluir usuário</a>
+      <a class="button" href="./profile_update.php">editar</a>
+      <button class="button" id="confirm">excluir usuário</button>
     </div>
   </section>
 </main>

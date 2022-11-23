@@ -56,6 +56,40 @@
     }
   }
 
+  // FORMATA VALOR
+  function formatValores($value){
+    if (strpos($value, "0") == 0){
+      $value = number_format($value, 2, ',', '.');
+      return $value;
+    }else{
+      $value = str_replace(',', '.', $value);
+      $value = number_format($value, 2, ',', '.');
+      return $value;
+    }
+  }
+
+  // CALCULAR A PORCENTAGEM CONCLUIDO DA META
+  
+
+  /*-----------------------------------       QUERYS      -----------------------------------*/
+  // MÉTODO QUE RETORNAS TODAS AS INFORMAÇÕES DAS METAS DO USUÁRIO PARA HOME
+  function contentMeta($id_user) {
+    $query = $GLOBALS['conn']->prepare("SELECT nome, valor_pretendido valor_total, valor_inicial, IFNULL(SUM(valor), 0) valor_adicoes
+                                        FROM tb_add_meta adm
+                                        RIGHT JOIN tb_meta m ON m.id_meta=adm.fk_meta
+                                        JOIN tb_user_meta rum ON m.id_meta=rum.fk_meta
+                                        WHERE fk_user=? AND fk_status=10
+                                        GROUP BY id_meta");
+    $query->execute([$id_user]);
+    $result = $query->FetchAll(PDO::FETCH_ASSOC);
+    for($k = 0; $k < sizeof($result); $k++){
+      $result[$k]['valor_atual'] = $result[$k]['valor_inicial'] + $result[$k]['valor_adicoes'];
+      $result[$k]['percent'] = (float)(100 * $result[$k]['valor_atual']) / (float)$result[$k]['valor_total'];
+    }
+
+    return $result;
+  }
+
   // MÉTODO RESPONSÁVEL PELO SELECT AO BANCO DE DADOS
   // function select($fields = '*', $table) {
   //   $query = $GLOBALS['conn']->prepare("SELECT $fields FROM $table
@@ -82,7 +116,7 @@
     // PEGA OS DADOS OS USER
     if($row_result['tipo'] == '1'){
         $query = $GLOBALS['conn']->prepare("SELECT email, ddd, telefone, nome, sobrenome, dt_nasc, sexo, cpf, cep, numero, 
-                                            complemento, bairro, rua, nm_cidade cidade, nm_estado estado
+                                            complemento, bairro, rua, nm_cidade cidade, cod_estado, nm_estado estado
                                             FROM tb_user u
                                             JOIN tb_pessoa p ON p.id_pessoa=u.fk_pessoa
                                             JOIN tb_endereco e ON e.id_endereco=u.fk_endereco
@@ -95,7 +129,7 @@
     }else{
         // PJ
         $query = $GLOBALS['conn']->prepare("SELECT email, ddd, telefone, nome, sobrenome, dt_nasc, sexo, cnpj, nm_empresa, 
-                                            cep, numero, complemento, bairro, rua, nm_cidade cidade, nm_estado estado
+                                            cep, numero, complemento, bairro, rua, nm_cidade cidade, cod_estado, nm_estado estado
                                             FROM tb_user u
                                             JOIN tb_pessoa p ON p.id_pessoa=u.fk_pessoa
                                             JOIN tb_endereco e ON e.id_endereco=u.fk_endereco

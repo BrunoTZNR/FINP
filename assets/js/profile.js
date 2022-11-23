@@ -1,3 +1,22 @@
+/* MODAL CONFIRM DELETE */
+const openModalButton = document.querySelector("#confirm");
+const closeModalButton = document.querySelector("#close");
+const redirectModalButton = document.querySelector("#delete");
+const modal = document.querySelector("#modal");
+const fade = document.querySelector("#fade");
+
+redirectModalButton.addEventListener("click", () =>{
+  window.location.href = "./profile_delete.php";
+});
+
+const toggleModal = () => {
+  [modal, fade].forEach((elemento) => elemento.classList.toggle("hide"));
+}
+
+[openModalButton, closeModalButton, fade].forEach((elemento) => {
+  elemento.addEventListener("click", () => toggleModal());
+});
+
 // MASCARAS PARA OS CAMPOS
 const field = document.querySelectorAll('.mascara');
 // 0-> cpf, 1-> cnpj, 2-> telefone, 3-> cep
@@ -46,7 +65,7 @@ if(!field[2].innerHTML == ''){
     if(tel[1].length == 0){
       tel[1] = '(' + tel[0][i];
     } else if(tel[1].length == 3) {
-      tel[1] += ') ' + tel[0][i];
+      tel[1] += ')' + tel[0][i];
     } else if(tel[1].length == 9) {
       tel[1] += tel[0][i] + '-';
     } else {
@@ -61,9 +80,7 @@ if(!field[3].innerHTML == ''){
   for(i = 0; i < 8; i++){
     if(cep[1].length == 0){
       cep[1] = cep[0][i];
-    } else if(cep[1].length == 1) {
-      cep[1] += cep[0][i] + '.';
-    } else if(cep[1].length == 5) {
+    } else if(cep[1].length == 4) {
       cep[1] += cep[0][i] + '-';
     } else {
       cep[1] += cep[0][i];

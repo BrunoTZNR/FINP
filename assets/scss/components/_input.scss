@@ -1,1 +1,30 @@
 @use './../globals/mixins' as *;
+
+input,
+select{
+  width: 65%;
+  height: 100%;
+  font-family: var(--title-font);
+  font-size: 1rem;
+  border: 0;
+  outline: 0;
+  padding-right: .7rem;
+  text-align: center;
+  color: var(--text-dark);
+  background-color: inherit;
+  border-radius: 0 .3rem .3rem 0;
+  transition: background-color .2s ease-in-out;
+
+  &[type="date"]{
+    cursor: text;
+  }
+
+  &:hover,
+  &:focus{
+    background-color: var(--color-7);
+  }
+}
+
+select{
+  cursor: pointer;
+}

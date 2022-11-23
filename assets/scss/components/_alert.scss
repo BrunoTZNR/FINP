@@ -1,0 +1,18 @@
+@use './../globals/mixins' as *;
+
+.alert{
+  opacity: 0;
+  pointer-events: none;
+  width: 290px;
+  height: 40px;
+  @include flex-center;
+  border-left: 4px solid var(--color-1);
+  position: absolute;
+  z-index: 10;
+  top: 85px;
+  right: 0;
+  transform: translateX(0);
+  transition: transform .75s ease-out;
+  color: var(--color-1);
+  background-color: var(--color-8);
+}
