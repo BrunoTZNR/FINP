@@ -66,7 +66,7 @@ if(!field[2].innerHTML == ''){
       tel[1] = '(' + tel[0][i];
     } else if(tel[1].length == 3) {
       tel[1] += ')' + tel[0][i];
-    } else if(tel[1].length == 9) {
+    } else if(tel[1].length == 8) {
       tel[1] += tel[0][i] + '-';
     } else {
       tel[1] += tel[0][i];

@@ -1,7 +1,8 @@
 @use './../globals/mixins' as *;
 
 input,
-select{
+select,
+textarea{
   width: 65%;
   height: 100%;
   font-family: var(--title-font);
@@ -23,8 +24,28 @@ select{
   &:focus{
     background-color: var(--color-7);
   }
+
+  &.search{
+    width: auto;
+    padding-left: 2rem;
+    text-align: start;
+    background-color: var(--color-5);
+    border-radius: .3rem;
+
+    &:focus{
+      background-color: var(--color-8);
+
+      &~ i{
+        color: var(--text-dark);
+      }
+    }
+  }
 }
 
 select{
   cursor: pointer;
+}
+
+textarea{
+  resize: none;
 }

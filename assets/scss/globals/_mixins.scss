@@ -6,6 +6,7 @@
 @mixin main-container-relative {
   width: 100%;
   min-height: calc(100vh - 140px);
+  height: 100%;
 }
 
 @mixin container {

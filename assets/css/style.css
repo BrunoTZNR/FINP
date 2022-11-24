@@ -38,6 +38,7 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  outline: 1px solid red;
 }
 
 body {
@@ -47,6 +48,14 @@ body {
   background-color: var(--bg-color);
   position: relative;
   overflow-x: hidden;
+}
+
+h1.listagem_title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
 }
 
 h3.card_title {
@@ -68,6 +77,10 @@ h3.profile_card_title {
 h4.profile_title {
   width: 35%;
   padding: 0.3rem 0.7rem;
+  color: var(--color-9);
+}
+h4.cheque_title {
+  margin-bottom: 0.5rem;
   color: var(--color-9);
 }
 
@@ -129,10 +142,62 @@ p.profile_text {
 p.profile_text:hover {
   background-color: var(--color-7);
 }
+p.progressao_title {
+  text-transform: uppercase;
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+  color: var(--text-dark);
+}
+p.card_text_valor {
+  color: var(--text-dark);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--color-6);
+}
+p.card_qtd_valor {
+  font-weight: 700;
+  text-align: end;
+  color: var(--text-light);
+}
+p.card_qtd_valor span {
+  font-weight: 500;
+  font-size: 0.75rem;
+  vertical-align: text-top;
+  color: var(--color-1);
+}
+p.meta_null_text {
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 1px;
+}
+p.cheque_text {
+  padding-left: 0.2rem;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid var(--color-6);
+  color: var(--text-dark);
+}
+p.cheque_text span {
+  font-size: 0.75rem;
+  vertical-align: text-top;
+}
 
 span.footer_year {
   color: var(--color-2);
   font-style: italic;
+}
+
+table {
+  color: var(--text-dark);
+}
+table thead {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .header, .footer {
@@ -245,8 +310,39 @@ span.footer_year {
   grid-area: acoes;
 }
 
+.listagem {
+  width: 100%;
+  min-height: calc(100vh - 140px);
+  height: 100%;
+}
+.listagem_container {
+  max-width: 1080px;
+  width: 100%;
+  height: 100%;
+  margin-inline: auto;
+  padding: 1rem 0;
+}
+
+.view, .update {
+  width: 100%;
+  height: calc(100vh - 140px);
+}
+.view_container, .update_container {
+  max-width: 1080px;
+  width: 100%;
+  height: 100%;
+  margin-inline: auto;
+  padding: 1rem 0;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+}
+
 input,
-select {
+select,
+textarea {
   width: 65%;
   height: 100%;
   font-family: var(--title-font);
@@ -261,20 +357,46 @@ select {
   transition: background-color 0.2s ease-in-out;
 }
 input[type=date],
-select[type=date] {
+select[type=date],
+textarea[type=date] {
   cursor: text;
 }
 input:hover, input:focus,
 select:hover,
-select:focus {
+select:focus,
+textarea:hover,
+textarea:focus {
   background-color: var(--color-7);
+}
+input.search,
+select.search,
+textarea.search {
+  width: auto;
+  padding-left: 2rem;
+  text-align: start;
+  background-color: var(--color-5);
+  border-radius: 0.3rem;
+}
+input.search:focus,
+select.search:focus,
+textarea.search:focus {
+  background-color: var(--color-8);
+}
+input.search:focus ~ i,
+select.search:focus ~ i,
+textarea.search:focus ~ i {
+  color: var(--text-dark);
 }
 
 select {
   cursor: pointer;
 }
 
-button, input[type=submit] {
+textarea {
+  resize: none;
+}
+
+button, input[type=submit], span {
   border: none;
   outline: none;
   font-family: var(--title-font);
@@ -286,6 +408,7 @@ button, input[type=submit] {
 }
 
 .button {
+  display: block;
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
   font-weight: 500;
@@ -392,6 +515,24 @@ button, input[type=submit] {
   background-color: var(--color-6);
   border-radius: 0.5rem;
 }
+.home_container .card_container_content {
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  background-color: var(--color-4);
+}
+.home_container .cheque {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.home_container .cheque_container {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  row-gap: 2rem;
+  padding: 0 1rem;
+}
 .home_container .meta {
   display: flex;
   flex-flow: column nowrap;
@@ -403,9 +544,11 @@ button, input[type=submit] {
   -moz-column-gap: 4rem;
        column-gap: 4rem;
   height: 35px;
+  background-color: var(--color-4);
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 .home_container .meta_acoes span {
-  cursor: pointer;
+  padding: 0.2rem 1rem;
 }
 .home_container .meta_carrosel {
   flex-grow: 1;
@@ -418,22 +561,63 @@ button, input[type=submit] {
   transition: transform 0.75s ease-in-out;
   transform: translateX(0);
 }
-.home_container .meta_carrosel .meta_carrosel_limit .content {
+.home_container .meta_carrosel .meta_carrosel_limit .meta_null {
+  align-self: center;
+}
+.home_container .meta_carrosel .meta_carrosel_limit .meta_content {
+  width: 100%;
   display: flex;
   flex-flow: nowrap column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  padding: 0.75rem 0;
   border-radius: inherit;
 }
-.home_container .meta_carrosel .meta_carrosel_limit .content.a1 {
-  background-color: pink;
+.home_container .meta_carrosel .meta_carrosel_limit .meta_content .meta_header {
+  width: 100%;
 }
-.home_container .meta_carrosel .meta_carrosel_limit .content.a2 {
-  background-color: orangered;
+.home_container .meta_carrosel .meta_carrosel_limit .meta_content .meta_header .progressao_container {
+  width: 250px;
+  height: 250px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 0.5rem solid var(--color-4);
+  background-color: var(--color-4);
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
 }
-.home_container .meta_carrosel .meta_carrosel_limit .content.a3 {
-  background-color: olivedrab;
+.home_container .meta_carrosel .meta_carrosel_limit .meta_content .meta_header .progressao_container_content {
+  content: "";
+  background-color: var(--color-7);
+}
+.home_container .meta_carrosel .meta_carrosel_limit .meta_content .meta_header .progressao_container_percent {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: text;
+  border: 0.5rem solid var(--color-4);
+  color: var(--text-light);
+  background-color: var(--color-6);
+}
+.home_container .meta_carrosel .meta_carrosel_limit .meta_content .meta_main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
 }
 
 .profile_container .card {
@@ -461,4 +645,140 @@ button, input[type=submit] {
   flex-direction: row;
   justify-content: center;
   gap: 0 1rem;
+}
+
+.listagem_container_header {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.listagem_container_header_acoes {
+  display: flex;
+  justify-content: space-between;
+}
+.listagem_container_header_acoes form {
+  position: relative;
+}
+.listagem_container_header_acoes form i {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-7);
+  transition: color 0.2s ease-in;
+}
+.listagem_container_table {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-6);
+}
+.listagem_container_table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.listagem_container_table tr {
+  height: 35px;
+  border-radius: inherit;
+}
+.listagem_container_table tr td {
+  text-align: center;
+  padding: 0 0.5rem;
+}
+.listagem_container_table tr td:first-child {
+  text-align: start;
+  border-radius: 0.3rem 0 0 0.3rem;
+}
+.listagem_container_table tr td:nth-child(2) {
+  width: 140px;
+}
+.listagem_container_table tr td:nth-child(3) {
+  width: 200px;
+}
+.listagem_container_table tr td:last-child {
+  width: 200px;
+  border-radius: 0 0.3rem 0.3rem 0;
+  margin-bottom: 0;
+}
+.listagem_container_table thead {
+  background-color: var(--color-5);
+  border-radius: 0.3rem;
+}
+.listagem_container_table thead tr td:first-child {
+  text-align: start;
+}
+.listagem_container_table tbody {
+  border-radius: 0;
+}
+.listagem_container_table tbody tr {
+  border-radius: 0;
+  margin-bottom: 0.25rem;
+}
+.listagem_container_table tbody tr:hover {
+  background-color: var(--color-7);
+  cursor: pointer;
+}
+
+.view_container_acoes, .update_container_acoes {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-6);
+}
+.view_container .cheque_card, .update_container .cheque_card {
+  width: 100%;
+  max-height: 300px;
+  height: 100%;
+  display: grid;
+  grid: "remetente remetente remetente" 1fr "descricao descricao descricao" 1fr "descricao descricao descricao" 1fr "tipo data valor" 1fr/1fr 1fr 2fr;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-6);
+}
+.view_container .cheque_card_container, .update_container .cheque_card_container {
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  background-color: var(--color-5);
+}
+.view_container .cheque_card_container input,
+.view_container .cheque_card_container textarea, .update_container .cheque_card_container input,
+.update_container .cheque_card_container textarea {
+  width: 100%;
+  height: auto;
+  text-align: start;
+  padding-left: 0.4rem;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid var(--color-6);
+  border-radius: 0.3rem;
+}
+.view_container .cheque_card_container input:hover, .view_container .cheque_card_container input:focus,
+.view_container .cheque_card_container textarea:hover,
+.view_container .cheque_card_container textarea:focus, .update_container .cheque_card_container input:hover, .update_container .cheque_card_container input:focus,
+.update_container .cheque_card_container textarea:hover,
+.update_container .cheque_card_container textarea:focus {
+  border-color: var(--color-8);
+}
+.view_container .cheque_card .descricao, .update_container .cheque_card .descricao {
+  grid-area: descricao;
+}
+.view_container .cheque_card .descricao p, .view_container .cheque_card .descricao input, .view_container .cheque_card .descricao textarea, .update_container .cheque_card .descricao p, .update_container .cheque_card .descricao input, .update_container .cheque_card .descricao textarea {
+  border-bottom: 0;
+}
+.view_container .cheque_card .valor, .update_container .cheque_card .valor {
+  grid-area: valor;
+}
+.view_container .cheque_card .data, .update_container .cheque_card .data {
+  grid-area: data;
+}
+.view_container .cheque_card .remetente, .update_container .cheque_card .remetente {
+  grid-area: remetente;
+}
+.view_container .cheque_card .tipo, .update_container .cheque_card .tipo {
+  grid-area: tipo;
 }/*# sourceMappingURL=style.css.map */

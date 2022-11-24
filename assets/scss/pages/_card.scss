@@ -1,0 +1,59 @@
+@use './../globals/mixins' as *;
+
+.view, .update{
+  &_container{
+    &_acoes{
+      width: 100%;
+      height: 80px;
+      @include flex-center;
+      column-gap: 1rem;
+      border-radius: .5rem;
+      padding: 1rem;
+      background-color: var(--color-6);
+    }
+
+    .cheque_card{
+      width: 100%;
+      max-height: 300px;
+      height: 100%;
+      display: grid;
+      grid: "remetente remetente remetente" 1fr
+            "descricao descricao descricao" 1fr
+            "descricao descricao descricao" 1fr
+            "tipo data valor" 1fr
+            / 1fr 1fr 2fr;
+      gap: 1rem;
+      border-radius: .5rem;
+      padding: 1rem;
+      background-color: var(--color-6);
+
+      &_container{
+        border-radius: .3rem;
+        padding: .5rem;
+        background-color: var(--color-5);
+
+        input,
+        textarea{
+          width: 100%;
+          height: auto;
+          text-align: start;
+          padding-left: .4rem;
+          padding-bottom: .1rem;
+          border-bottom: 2px solid var(--color-6);
+          border-radius: .3rem;
+
+          &:hover,
+          &:focus{
+            border-color: var(--color-8);
+          }
+        }
+      }
+
+      .descricao{grid-area: descricao; p,input,textarea{border-bottom: 0;}}
+      .valor{grid-area: valor;}
+      .data{grid-area: data;}
+      .remetente{grid-area: remetente;}
+      .tipo{grid-area: tipo;}
+    }
+  }
+}

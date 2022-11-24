@@ -72,32 +72,7 @@
   
 
   /*-----------------------------------       QUERYS      -----------------------------------*/
-  // MÉTODO QUE RETORNAS TODAS AS INFORMAÇÕES DAS METAS DO USUÁRIO PARA HOME
-  function contentMeta($id_user) {
-    $query = $GLOBALS['conn']->prepare("SELECT nome, valor_pretendido valor_total, valor_inicial, IFNULL(SUM(valor), 0) valor_adicoes
-                                        FROM tb_add_meta adm
-                                        RIGHT JOIN tb_meta m ON m.id_meta=adm.fk_meta
-                                        JOIN tb_user_meta rum ON m.id_meta=rum.fk_meta
-                                        WHERE fk_user=? AND fk_status=10
-                                        GROUP BY id_meta");
-    $query->execute([$id_user]);
-    $result = $query->FetchAll(PDO::FETCH_ASSOC);
-    for($k = 0; $k < sizeof($result); $k++){
-      $result[$k]['valor_atual'] = $result[$k]['valor_inicial'] + $result[$k]['valor_adicoes'];
-      $result[$k]['percent'] = (float)(100 * $result[$k]['valor_atual']) / (float)$result[$k]['valor_total'];
-    }
-
-    return $result;
-  }
-
-  // MÉTODO RESPONSÁVEL PELO SELECT AO BANCO DE DADOS
-  // function select($fields = '*', $table) {
-  //   $query = $GLOBALS['conn']->prepare("SELECT $fields FROM $table
-  //                                       WHERE ");
-
-  //   return $query;
-  // }
-
+  // MÉTODO QUE RETORNA TODAS AS INFORMAÇÕES DO USUÁRIO PARA PROFILE
   function viewUser($id_user){
     // VERIFICA SE O USER É PF OU PJ
     $query = $GLOBALS['conn']->prepare("SELECT
@@ -157,4 +132,104 @@
     }
 
     return [$pf, $pj, $result];
+  }
+
+  // MÉTODO QUE RETORNA TODAS AS INFORMAÇÕES DAS METAS DO USUÁRIO PARA HOME
+  function contentMeta($id_user) {
+    $query = $GLOBALS['conn']->prepare("SELECT nome, valor_pretendido valor_total, valor_inicial, IFNULL(SUM(valor), 0) valor_adicoes
+                                        FROM tb_add_meta adm
+                                        RIGHT JOIN tb_meta m ON m.id_meta=adm.fk_meta
+                                        JOIN tb_user_meta rum ON m.id_meta=rum.fk_meta
+                                        WHERE fk_user=? AND fk_status=10
+                                        GROUP BY id_meta");
+    $query->execute([$id_user]);
+    $result = $query->FetchAll(PDO::FETCH_ASSOC);
+    for($k = 0; $k < sizeof($result); $k++){
+      $result[$k]['valor_atual'] = $result[$k]['valor_inicial'] + $result[$k]['valor_adicoes'];
+      $result[$k]['percent'] = (float)(100 * $result[$k]['valor_atual']) / (float)$result[$k]['valor_total'];
+    }
+
+    return $result;
+  }
+
+  // MÉTODO QUE RETORNA TODAS AS INFORMAÇÕES DOS CHEQUES DO USUÁRIO PARA HOME
+  function contentCheque($id_user) {
+    $query = $GLOBALS['conn']->prepare("SELECT IFNULL(SUM(valor), 0) enviados, IFNULL(SUM(valor), 0) recebidos 
+                                        FROM tb_cheque c
+                                        JOIN tb_user_cheque ruc ON c.id_cheque=ruc.fk_cheque
+                                        WHERE dt LIKE ? AND fk_user=? AND fk_status=8");
+    $query->execute([date('Y-m').'-%%', $id_user]);
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+  }
+
+  // MÉTODO QUE DEFINE OS CAMPOS E OS VALORES DOS MESMOS DA TABELA NA LISTAGEM
+  function tableContent($id_user, $tipo){
+    $tbody = '';
+
+    if ($tipo == 'boletos') {
+
+    } else if ($tipo == 'cheques') {
+      $thead = '<tr>
+        <td>descrição</td>
+        <td>data</td>
+        <td>tipo</td>
+        <td>valor</td>
+      </tr>';
+
+      $query = $GLOBALS['conn']->prepare("SELECT id_cheque, descricao, dt, 
+                                          CASE
+                                              WHEN fk_status='8' THEN 'Enviado'
+                                              WHEN fk_status='9' THEN 'Recebido'
+                                          END AS 'status', valor 
+                                          FROM tb_cheque c
+                                          JOIN tb_user_cheque ruc ON c.id_cheque=ruc.fk_cheque
+                                          WHERE fk_user=?
+                                          ORDER BY id_cheque");
+      $query->execute([$id_user]);
+      
+      if ($query->rowCount() > 0) {
+        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+          $tbody .= '<tr class="'. $result['id_cheque'] .' '. $tipo .'">
+            <td>'. $result['descricao'] .'</td>
+            <td>'. date('d/m/Y', strtotime($result['dt'])) .'</td>
+            <td>'. $result['status'] .'</td>
+            <td>R$ '. formatValores($result['valor']) .'</td>
+          </tr>';
+        }
+      } else {
+        $tbody = '<tr><td colspan="5">No tiente no uno puto cadastrado!</td></tr>';
+      }
+
+    } else if ($tipo == 'metas') {
+      
+    } else if ($tipo == 'cartoes') {
+      
+    } else if ($tipo == 'investimentos') {
+      
+    } else {
+      return false;
+    }
+
+    return [$thead, $tbody];
+  }
+
+  // MÉTODO QUE RETORNA TODAS AS INFORMAÇÕES DOS CHEQUES DO USUÁRIO
+  function viewCheque($id_user, $id_cheque) {
+    $query = $GLOBALS['conn']->prepare("SELECT descricao, valor, dt, remetente,
+                                        CASE
+                                          WHEN fk_status='8' THEN 'Enviado'
+                                            WHEN fk_status='9' THEN 'Recebido'
+                                        END AS 'status'
+                                        FROM tb_cheque c
+                                        JOIN tb_user_cheque ruc ON c.id_cheque=ruc.fk_cheque
+                                        WHERE id_cheque = ? AND fk_user = ?");
+    $query->execute([$id_cheque, $id_user]);
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+
+    $result['valor'] = formatValores($result['valor']);
+    $result['dt'] = date('d/m/Y', strtotime($result['dt']));
+
+    return $result;
   }

@@ -76,30 +76,11 @@
           / minmax(200px, .8fr) minmax(350px, 1fr) minmax(200px, .8fr);
     gap: 1rem;
 
-    & .boleto{
-      grid-area: boleto;
-      // background-color: red;
-    }
-
-    & .cheque{
-      grid-area: cheque;
-      // background-color: green;
-    }
-
-    & .meta{
-      grid-area: meta;
-      // background-color: pink;
-    }
-
-    & .cartao{
-      grid-area: cartao;
-      // background-color: yellow;
-    }
-
-    & .investimento{
-      grid-area: investimento;
-      // background-color: blue;
-    }
+    .boleto{grid-area: boleto;}
+    .cheque{grid-area: cheque;}
+    .meta{grid-area: meta;}
+    .cartao{grid-area: cartao;}
+    .investimento{grid-area: investimento;}
   }
 }
 
@@ -115,19 +96,26 @@
           / minmax(400px, 1fr) minmax(400px, 1fr);
     gap: 1rem;
 
-    & .dados{
-      grid-area: dados;
-      // background-color: green;
-    }
+    .dados{grid-area: dados;}
+    .endereco{grid-area: endereco;}
+    .acoes{grid-area: acoes;}
+  }
+}
 
-    & .endereco{
-      grid-area: endereco;
-      // background-color: orangered;
-    }
+.listagem{
+  @include main-container-relative;
 
-    & .acoes{
-      grid-area: acoes;
-      // background-color: red;
-    }
+  &_container{
+    @include container;
+  }
+}
+
+.view, .update{
+  @include main-container;
+
+  &_container{
+    @include container;
+    @include flex-center-column;
+    row-gap: 1rem;
   }
 }

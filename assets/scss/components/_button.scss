@@ -1,6 +1,6 @@
 @use './../globals/mixins' as *;
 
-button, input[type="submit"]{
+button, input[type="submit"], span{
   border: none;
   outline: none;
   font-family: var(--title-font);
@@ -12,6 +12,7 @@ button, input[type="submit"]{
 }
 
 .button{
+  display: block;
   padding: .5rem 1rem;
   border-radius: .2rem;
   font-weight: 500;

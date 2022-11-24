@@ -1,0 +1,94 @@
+@use './../globals/mixins' as *;
+
+.listagem{
+  &_container{
+    &_header{
+      width: 100%;
+      margin-bottom: 2rem;
+
+      &_acoes{
+        display: flex;
+        justify-content: space-between;
+
+        form{
+          position: relative;
+
+          i{
+            position: absolute;
+            left: .5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-7);
+            transition: color .2s ease-in;
+          }
+        }
+      }
+    }
+
+    &_table{
+      width: 100%;
+      padding: 1rem;
+      border-radius: .5rem;
+      background-color: var(--color-6);
+
+      table{
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      tr{
+        height: 35px;
+        border-radius: inherit;
+
+        td{
+          text-align: center;
+          padding: 0 .5rem;
+
+          &:first-child{
+            text-align: start;
+            border-radius: .3rem 0 0 .3rem;
+          }
+
+          &:nth-child(2){
+            width: 140px;
+          }
+
+          &:nth-child(3){
+            width: 200px;
+          }
+
+          &:last-child{
+            width: 200px;
+            border-radius: 0 .3rem .3rem 0;
+            margin-bottom: 0;
+          }
+        }
+      }
+      
+      thead{
+        background-color: var(--color-5);
+        border-radius: .3rem;
+
+        tr{
+          td:first-child{
+            text-align: start;
+          }
+        }
+      }
+
+      tbody{
+        border-radius: 0;
+
+        tr{
+          border-radius: 0;
+          margin-bottom: .25rem;
+
+          &:hover{
+            background-color: var(--color-7);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
