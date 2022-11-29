@@ -10,18 +10,18 @@
 
   verifyLogin($logout);
 
+  define('ALERT', true);
   define('TITLE', 'PROFILE - UPDATE');
 
   include './../header.php';
 
   $dados = viewUser($_SESSION['id_user']);
-  $alert = '';
 
   if (isset($_POST['alterar'])) {
     if (empty($_POST['nome']) || empty($_POST['sobrenome']) || empty($_POST['dt_nasc']) || empty($_POST['sexo']) || empty($_POST['cpf'])
         || empty($_POST['email']) || empty($_POST['telefone']) || empty($_POST['cep']) || empty($_POST['cidade']) || empty($_POST['estado']) 
         || empty($_POST['rua']) || empty($_POST['bairro']) || empty($_POST['numero'])) {
-      $alert = 'Todos os campos são obrigatórios!';
+          // mensagem
     } else {
       $nome = clean($_POST['nome']);
       $sobrenome = clean($_POST['sobrenome']);
@@ -83,7 +83,7 @@
 ?>
 
 <section class="alert">
-  <p class="alert_text"><?=$alert?></p>
+  <p class="alert_text"></p> 
 </section>
 
 <main class="profile">

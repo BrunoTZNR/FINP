@@ -21,7 +21,7 @@
 
   <title><?=TITLE?></title>
 </head>
-<body <?php if(TITLE == 'PROFILE - UPDATE'){echo 'onload="alertView()"';}else{echo '';} ?>>
+<body <?php if(ALERT){echo 'onload="alertView()"';}else{echo '';} ?>>
   <header class="header">
     <section class="header_container">
       <ul>

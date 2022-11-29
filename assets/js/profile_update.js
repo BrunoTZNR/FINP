@@ -2,7 +2,10 @@ function alertView(){
   const alert = document.querySelector('.alert');
 
   if(!alert.querySelector('p').innerHTML == ''){
+    console.log(alert.querySelector('p').innerHTML);
     alert.style.opacity = '1';
+  } else {
+    alert.style.opacity = '0';
   }
 
   setTimeout(() => {

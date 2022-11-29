@@ -1,6 +1,6 @@
 @use './../globals/mixins' as *;
 
-.alert{
+.alert, .alert_listagem{
   opacity: 0;
   pointer-events: none;
   width: 290px;

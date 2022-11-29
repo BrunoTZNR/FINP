@@ -1,8 +1,10 @@
 <?php
   require './conexao.php';
 
-  $teste = viewCheque($_SESSION['id_user'], '1');
-
+  $teste = viewInvestimento(1,2);
+  $teste['dt_investimento'] = date('Y-m-d', strtotime($teste['dt_investimento']));
+  $teste['dt_vencimento'] = date('d/m/Y', strtotime($teste['dt_vencimento']));
+  // $teste['dt_vencimento'] = strtotime($teste['dt_investimento']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,5 +22,6 @@
 </head>
 <body>
   <?php echo'<pre>'; print_r($teste); echo '</pre>'?>
+  <?php echo'<pre>'; var_dump($teste); echo '</pre>'?>
 </body>
 </html>

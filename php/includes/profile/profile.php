@@ -9,6 +9,7 @@
 
   verifyLogin($logout);
 
+  define('ALERT', false);
   define('TITLE', 'PROFILE');
 
   include './../header.php';

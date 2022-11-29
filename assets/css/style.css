@@ -38,7 +38,6 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  outline: 1px solid red;
 }
 
 body {
@@ -58,6 +57,11 @@ h1.listagem_title {
   color: var(--text-dark);
 }
 
+h3 {
+  transition-property: color, background-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
 h3.card_title {
   height: 35px;
   display: flex;
@@ -79,9 +83,14 @@ h4.profile_title {
   padding: 0.3rem 0.7rem;
   color: var(--color-9);
 }
-h4.cheque_title {
+h4.card_title_view {
   margin-bottom: 0.5rem;
   color: var(--color-9);
+}
+h4.card_cartao_title {
+  text-align: center;
+  color: var(--text-dark);
+  font-weight: 500;
 }
 
 a {
@@ -121,6 +130,44 @@ a.header_user_acoes:hover {
   background-color: var(--color-8);
   color: var(--text-dark);
 }
+a.card_title--hover:hover h3 {
+  color: var(--color-1);
+  background-color: var(--color-7);
+}
+a.card_redirect {
+  width: 18px;
+  height: 100%;
+  margin-right: 0.75rem;
+  background-color: var(--color-6);
+}
+a.card_redirect:hover {
+  background-color: var(--color-7);
+}
+a.card_text_view {
+  display: block;
+  padding-left: 0.2rem;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid var(--color-6);
+  color: var(--text-dark);
+  border-radius: 0.3rem;
+  transition-property: background-color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+a.card_text_view:hover {
+  background-color: var(--color-7);
+  border-color: var(--color-8);
+}
+a.card_text_view span {
+  font-size: 0.75rem;
+  vertical-align: text-top;
+}
+a.card_text_view.add_meta {
+  margin-bottom: 0.75rem;
+}
+a.card_text_view.add_meta:last-child {
+  margin-bottom: 0;
+}
 
 p.footer_text {
   color: var(--color-1);
@@ -159,10 +206,18 @@ p.card_text_valor {
   justify-content: space-between;
   border-bottom: 2px solid var(--color-6);
 }
+p.card_text_valor--cartao {
+  padding-bottom: 0.15rem;
+  font-size: 0.8rem;
+}
 p.card_qtd_valor {
   font-weight: 700;
   text-align: end;
   color: var(--text-light);
+}
+p.card_qtd_valor--center {
+  font-weight: 500;
+  text-align: center;
 }
 p.card_qtd_valor span {
   font-weight: 500;
@@ -170,25 +225,64 @@ p.card_qtd_valor span {
   vertical-align: text-top;
   color: var(--color-1);
 }
+p.card_qtd_valor span.porcentagem {
+  font-weight: 700;
+  font-size: 1rem;
+  font-style: italic;
+  color: inherit;
+}
+p.card_cartao_text {
+  text-align: center;
+  font-style: italic;
+  color: var(--color-1);
+  margin-bottom: 0.75rem;
+}
 p.meta_null_text {
   font-weight: 700;
   color: var(--text-dark);
   letter-spacing: 1px;
 }
-p.cheque_text {
+p.card_text_view {
   padding-left: 0.2rem;
   padding-bottom: 0.1rem;
   border-bottom: 2px solid var(--color-6);
   color: var(--text-dark);
+  border-radius: 0.3rem;
+  transition-property: background-color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
 }
-p.cheque_text span {
+p.card_text_view:hover {
+  background-color: var(--color-7);
+  border-color: var(--color-8);
+}
+p.card_text_view span {
   font-size: 0.75rem;
   vertical-align: text-top;
+}
+p.add_meta {
+  margin-bottom: 0.75rem;
+}
+p.add_meta:last-child {
+  margin-bottom: 0;
 }
 
 span.footer_year {
   color: var(--color-2);
   font-style: italic;
+}
+span.investimento_tipo {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--text-light);
+  color: var(--text-dark);
+}
+span.mascara_valor {
+  position: absolute;
+  left: 15px;
+  color: var(--text-dark);
 }
 
 table {
@@ -323,11 +417,11 @@ table thead {
   padding: 1rem 0;
 }
 
-.view, .update {
+.view, .update, .add_meta {
   width: 100%;
   height: calc(100vh - 140px);
 }
-.view_container, .update_container {
+.view_container, .update_container, .add_meta_container {
   max-width: 1080px;
   width: 100%;
   height: 100%;
@@ -396,7 +490,7 @@ textarea {
   resize: none;
 }
 
-button, input[type=submit], span {
+button, input[type=submit], span.button {
   border: none;
   outline: none;
   font-family: var(--title-font);
@@ -423,7 +517,7 @@ button, input[type=submit], span {
   box-shadow: 2px 2px 3px var(--color-9);
 }
 
-.alert {
+.alert, .alert_listagem {
   opacity: 0;
   pointer-events: none;
   width: 290px;
@@ -520,10 +614,40 @@ button, input[type=submit], span {
   border-radius: 0.3rem;
   background-color: var(--color-4);
 }
+.home_container .boleto {
+  height: 100%;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
+}
+.home_container .boleto_container {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
+  row-gap: 1rem;
+  padding: 1rem;
+}
+.home_container .boleto_container_content {
+  display: flex;
+  justify-content: space-between;
+}
+.home_container .boleto_container_content .card_text_valor {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .home_container .cheque {
   height: 100%;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
 }
 .home_container .cheque_container {
   flex-grow: 1;
@@ -541,8 +665,7 @@ button, input[type=submit], span {
   display: flex;
   justify-content: center;
   align-items: center;
-  -moz-column-gap: 4rem;
-       column-gap: 4rem;
+  justify-content: space-around;
   height: 35px;
   background-color: var(--color-4);
   border-radius: 0 0 0.5rem 0.5rem;
@@ -618,6 +741,79 @@ button, input[type=submit], span {
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
+}
+.home_container .cartao {
+  height: 100%;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
+}
+.home_container .cartao_container {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
+  row-gap: 1rem;
+  padding: 1rem;
+}
+.home_container .cartao_container_content {
+  display: flex;
+  justify-content: space-between;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+}
+.home_container .cartao_container_content article {
+  width: 50%;
+}
+.home_container .investimento {
+  height: 100%;
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
+}
+.home_container .investimento_container {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  row-gap: 0.5rem;
+  padding: 0 1rem;
+}
+.home_container .investimento_container_content {
+  display: grid;
+  grid: "valor_text valor" auto "progressao progressao" 15px/1fr 1fr;
+  row-gap: 0.5rem;
+}
+.home_container .investimento_container_content .progressao {
+  grid-area: progressao;
+  display: flex;
+  border: 2px solid var(--text-dark);
+}
+.home_container .investimento_container_content .progressao div {
+  height: 100%;
+}
+.home_container .investimento_container_content .card_text_valor {
+  grid-area: valor_text;
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.home_container .investimento_container_content .card_qtd_valor {
+  grid-area: valor;
+}
+.home_container .investimento_container_tipos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 
 .profile_container .card {
@@ -718,7 +914,45 @@ button, input[type=submit], span {
   cursor: pointer;
 }
 
-.view_container_acoes, .update_container_acoes {
+.view_container input,
+.view_container select,
+.view_container textarea,
+.update_container input,
+.update_container select,
+.update_container textarea,
+.add_meta_container input,
+.add_meta_container select,
+.add_meta_container textarea {
+  width: 100%;
+  height: auto;
+  text-align: start;
+  padding-left: 0.4rem;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid var(--color-6);
+  border-radius: 0.3rem;
+}
+.view_container input:hover, .view_container input:focus,
+.view_container select:hover,
+.view_container select:focus,
+.view_container textarea:hover,
+.view_container textarea:focus,
+.update_container input:hover,
+.update_container input:focus,
+.update_container select:hover,
+.update_container select:focus,
+.update_container textarea:hover,
+.update_container textarea:focus,
+.add_meta_container input:hover,
+.add_meta_container input:focus,
+.add_meta_container select:hover,
+.add_meta_container select:focus,
+.add_meta_container textarea:hover,
+.add_meta_container textarea:focus {
+  border-color: var(--color-8);
+}
+.view_container_acoes,
+.update_container_acoes,
+.add_meta_container_acoes {
   width: 100%;
   height: 80px;
   display: flex;
@@ -730,55 +964,423 @@ button, input[type=submit], span {
   padding: 1rem;
   background-color: var(--color-6);
 }
-.view_container .cheque_card, .update_container .cheque_card {
+.view_container .add_meta_content,
+.update_container .add_meta_content,
+.add_meta_container .add_meta_content {
   width: 100%;
-  max-height: 300px;
+  max-height: 350px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-6);
+}
+.view_container .add_meta_content_container,
+.update_container .add_meta_content_container,
+.add_meta_container .add_meta_content_container {
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  background-color: var(--color-5);
+  position: relative;
+}
+.view_container .add_meta_content .descricao,
+.update_container .add_meta_content .descricao,
+.add_meta_container .add_meta_content .descricao {
+  grid-area: descricao;
+}
+.view_container .add_meta_content .data,
+.update_container .add_meta_content .data,
+.add_meta_container .add_meta_content .data {
+  grid-area: data;
+}
+.view_container .add_meta_content .obs,
+.update_container .add_meta_content .obs,
+.add_meta_container .add_meta_content .obs {
+  grid-area: obs;
+}
+.view_container .add_meta_content .status,
+.update_container .add_meta_content .status,
+.add_meta_container .add_meta_content .status {
+  grid-area: status;
+}
+.view_container .add_meta_content .valor,
+.update_container .add_meta_content .valor,
+.add_meta_container .add_meta_content .valor {
+  grid-area: valor;
+}
+.view_container .add_meta_content .valor input,
+.update_container .add_meta_content .valor input,
+.add_meta_container .add_meta_content .valor input {
+  padding-left: 1.75rem;
+}
+.view_container .add_meta_content .cod_barra,
+.update_container .add_meta_content .cod_barra,
+.add_meta_container .add_meta_content .cod_barra {
+  grid-area: cod_barra;
+}
+.view_container .add_meta_content .pagamento,
+.update_container .add_meta_content .pagamento,
+.add_meta_container .add_meta_content .pagamento {
+  grid-area: pagamento;
+}
+.view_container .boleto_card,
+.update_container .boleto_card,
+.add_meta_container .boleto_card {
+  width: 100%;
+  max-height: 350px;
   height: 100%;
   display: grid;
-  grid: "remetente remetente remetente" 1fr "descricao descricao descricao" 1fr "descricao descricao descricao" 1fr "tipo data valor" 1fr/1fr 1fr 2fr;
+  grid: "descricao descricao descricao data" 1fr "obs obs obs obs" 1fr "status valor valor pagamento" 1fr "cod_barra cod_barra cod_barra cod_barra" 1fr/1fr 1fr 1fr 1fr;
   gap: 1rem;
   border-radius: 0.5rem;
   padding: 1rem;
   background-color: var(--color-6);
 }
-.view_container .cheque_card_container, .update_container .cheque_card_container {
+.view_container .boleto_card_container,
+.update_container .boleto_card_container,
+.add_meta_container .boleto_card_container {
   border-radius: 0.3rem;
   padding: 0.5rem;
   background-color: var(--color-5);
+  position: relative;
 }
-.view_container .cheque_card_container input,
-.view_container .cheque_card_container textarea, .update_container .cheque_card_container input,
-.update_container .cheque_card_container textarea {
-  width: 100%;
-  height: auto;
-  text-align: start;
-  padding-left: 0.4rem;
-  padding-bottom: 0.1rem;
-  border-bottom: 2px solid var(--color-6);
-  border-radius: 0.3rem;
-}
-.view_container .cheque_card_container input:hover, .view_container .cheque_card_container input:focus,
-.view_container .cheque_card_container textarea:hover,
-.view_container .cheque_card_container textarea:focus, .update_container .cheque_card_container input:hover, .update_container .cheque_card_container input:focus,
-.update_container .cheque_card_container textarea:hover,
-.update_container .cheque_card_container textarea:focus {
-  border-color: var(--color-8);
-}
-.view_container .cheque_card .descricao, .update_container .cheque_card .descricao {
+.view_container .boleto_card .descricao,
+.update_container .boleto_card .descricao,
+.add_meta_container .boleto_card .descricao {
   grid-area: descricao;
 }
-.view_container .cheque_card .descricao p, .view_container .cheque_card .descricao input, .view_container .cheque_card .descricao textarea, .update_container .cheque_card .descricao p, .update_container .cheque_card .descricao input, .update_container .cheque_card .descricao textarea {
-  border-bottom: 0;
-}
-.view_container .cheque_card .valor, .update_container .cheque_card .valor {
-  grid-area: valor;
-}
-.view_container .cheque_card .data, .update_container .cheque_card .data {
+.view_container .boleto_card .data,
+.update_container .boleto_card .data,
+.add_meta_container .boleto_card .data {
   grid-area: data;
 }
-.view_container .cheque_card .remetente, .update_container .cheque_card .remetente {
+.view_container .boleto_card .obs,
+.update_container .boleto_card .obs,
+.add_meta_container .boleto_card .obs {
+  grid-area: obs;
+}
+.view_container .boleto_card .status,
+.update_container .boleto_card .status,
+.add_meta_container .boleto_card .status {
+  grid-area: status;
+}
+.view_container .boleto_card .valor,
+.update_container .boleto_card .valor,
+.add_meta_container .boleto_card .valor {
+  grid-area: valor;
+}
+.view_container .boleto_card .valor input,
+.update_container .boleto_card .valor input,
+.add_meta_container .boleto_card .valor input {
+  padding-left: 1.75rem;
+}
+.view_container .boleto_card .cod_barra,
+.update_container .boleto_card .cod_barra,
+.add_meta_container .boleto_card .cod_barra {
+  grid-area: cod_barra;
+}
+.view_container .boleto_card .pagamento,
+.update_container .boleto_card .pagamento,
+.add_meta_container .boleto_card .pagamento {
+  grid-area: pagamento;
+}
+.view_container .cheque_card,
+.update_container .cheque_card,
+.add_meta_container .cheque_card {
+  width: 100%;
+  max-height: 300px;
+  height: 100%;
+  display: grid;
+  grid: "remetente remetente instituicao" 1fr "descricao descricao descricao" 1fr "descricao descricao descricao" 1fr "tipo data valor" 1fr/1fr 1fr 2fr;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-6);
+}
+.view_container .cheque_card_container,
+.update_container .cheque_card_container,
+.add_meta_container .cheque_card_container {
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  background-color: var(--color-5);
+  position: relative;
+}
+.view_container .cheque_card .descricao,
+.update_container .cheque_card .descricao,
+.add_meta_container .cheque_card .descricao {
+  grid-area: descricao;
+}
+.view_container .cheque_card .descricao textarea,
+.update_container .cheque_card .descricao textarea,
+.add_meta_container .cheque_card .descricao textarea {
+  height: 70%;
+}
+.view_container .cheque_card .instuicao,
+.update_container .cheque_card .instuicao,
+.add_meta_container .cheque_card .instuicao {
+  grid-area: instituicao;
+}
+.view_container .cheque_card .valor,
+.update_container .cheque_card .valor,
+.add_meta_container .cheque_card .valor {
+  grid-area: valor;
+}
+.view_container .cheque_card .valor input,
+.update_container .cheque_card .valor input,
+.add_meta_container .cheque_card .valor input {
+  padding-left: 1.75rem;
+}
+.view_container .cheque_card .data,
+.update_container .cheque_card .data,
+.add_meta_container .cheque_card .data {
+  grid-area: data;
+}
+.view_container .cheque_card .remetente,
+.update_container .cheque_card .remetente,
+.add_meta_container .cheque_card .remetente {
   grid-area: remetente;
 }
-.view_container .cheque_card .tipo, .update_container .cheque_card .tipo {
+.view_container .cheque_card .tipo,
+.update_container .cheque_card .tipo,
+.add_meta_container .cheque_card .tipo {
   grid-area: tipo;
+}
+.view_container .meta_card,
+.update_container .meta_card,
+.add_meta_container .meta_card {
+  width: 100%;
+  max-height: 350px;
+  height: 100%;
+  display: grid;
+  grid: "nome nome status add" 1fr "descricao descricao descricao add" 1fr "dt_inicio valor_inicial valor_adicoes add" 1fr "dt_fim valor_pretendido valor_atual add" 1fr/1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-6);
+}
+.view_container .meta_card_container,
+.update_container .meta_card_container,
+.add_meta_container .meta_card_container {
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  background-color: var(--color-5);
+  position: relative;
+}
+.view_container .meta_card .nome,
+.update_container .meta_card .nome,
+.add_meta_container .meta_card .nome {
+  grid-area: nome;
+}
+.view_container .meta_card .descricao,
+.update_container .meta_card .descricao,
+.add_meta_container .meta_card .descricao {
+  grid-area: descricao;
+}
+.view_container .meta_card .status,
+.update_container .meta_card .status,
+.add_meta_container .meta_card .status {
+  grid-area: status;
+}
+.view_container .meta_card .dt_inicio,
+.update_container .meta_card .dt_inicio,
+.add_meta_container .meta_card .dt_inicio {
+  grid-area: dt_inicio;
+}
+.view_container .meta_card .dt_fim,
+.update_container .meta_card .dt_fim,
+.add_meta_container .meta_card .dt_fim {
+  grid-area: dt_fim;
+}
+.view_container .meta_card .valor_inicial,
+.update_container .meta_card .valor_inicial,
+.add_meta_container .meta_card .valor_inicial {
+  grid-area: valor_inicial;
+}
+.view_container .meta_card .valor_inicial input,
+.update_container .meta_card .valor_inicial input,
+.add_meta_container .meta_card .valor_inicial input {
+  padding-left: 1.75rem;
+}
+.view_container .meta_card .valor_pretendido,
+.update_container .meta_card .valor_pretendido,
+.add_meta_container .meta_card .valor_pretendido {
+  grid-area: valor_pretendido;
+}
+.view_container .meta_card .valor_pretendido input,
+.update_container .meta_card .valor_pretendido input,
+.add_meta_container .meta_card .valor_pretendido input {
+  padding-left: 1.75rem;
+}
+.view_container .meta_card .valor_adicoes,
+.update_container .meta_card .valor_adicoes,
+.add_meta_container .meta_card .valor_adicoes {
+  grid-area: valor_adicoes;
+}
+.view_container .meta_card .valor_atual,
+.update_container .meta_card .valor_atual,
+.add_meta_container .meta_card .valor_atual {
+  grid-area: valor_atual;
+}
+.view_container .meta_card .add,
+.update_container .meta_card .add,
+.add_meta_container .meta_card .add {
+  grid-area: add;
+  overflow-y: scroll;
+}
+.view_container .meta_card .add::-webkit-scrollbar,
+.update_container .meta_card .add::-webkit-scrollbar,
+.add_meta_container .meta_card .add::-webkit-scrollbar {
+  width: 8px;
+  background-color: var(--color-1);
+}
+.view_container .meta_card .add::-webkit-scrollbar-track,
+.update_container .meta_card .add::-webkit-scrollbar-track,
+.add_meta_container .meta_card .add::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: var(--color-4);
+}
+.view_container .meta_card .add::-webkit-scrollbar-thumb,
+.update_container .meta_card .add::-webkit-scrollbar-thumb,
+.add_meta_container .meta_card .add::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: var(--color-7);
+}
+.view_container .cartao_card,
+.update_container .cartao_card,
+.add_meta_container .cartao_card {
+  width: 100%;
+  max-height: 175px;
+  height: 100%;
+  display: grid;
+  grid: "nome nome data" 1fr "status valor pagamento" 1fr/1fr 1fr 1fr;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-6);
+}
+.view_container .cartao_card_container,
+.update_container .cartao_card_container,
+.add_meta_container .cartao_card_container {
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  background-color: var(--color-5);
+  position: relative;
+}
+.view_container .cartao_card .nome,
+.update_container .cartao_card .nome,
+.add_meta_container .cartao_card .nome {
+  grid-area: nome;
+}
+.view_container .cartao_card .data,
+.update_container .cartao_card .data,
+.add_meta_container .cartao_card .data {
+  grid-area: data;
+}
+.view_container .cartao_card .status,
+.update_container .cartao_card .status,
+.add_meta_container .cartao_card .status {
+  grid-area: status;
+}
+.view_container .cartao_card .valor,
+.update_container .cartao_card .valor,
+.add_meta_container .cartao_card .valor {
+  grid-area: valor;
+}
+.view_container .cartao_card .valor input,
+.update_container .cartao_card .valor input,
+.add_meta_container .cartao_card .valor input {
+  padding-left: 1.75rem;
+}
+.view_container .cartao_card .pagamento,
+.update_container .cartao_card .pagamento,
+.add_meta_container .cartao_card .pagamento {
+  grid-area: pagamento;
+}
+.view_container .investimento_card,
+.update_container .investimento_card,
+.add_meta_container .investimento_card {
+  width: 100%;
+  max-height: 350px;
+  height: 100%;
+  display: grid;
+  grid: "nome nome nm_instituicao" 1fr "tipo tipo_rentabilidade valor_rentabilidade" 1fr "status dt_investimento dt_vencimento" 1fr "qtd_cota valor_cota valor_total" 1fr/1fr 1fr 1fr;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-6);
+}
+.view_container .investimento_card_container,
+.update_container .investimento_card_container,
+.add_meta_container .investimento_card_container {
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  background-color: var(--color-5);
+  position: relative;
+}
+.view_container .investimento_card .nome,
+.update_container .investimento_card .nome,
+.add_meta_container .investimento_card .nome {
+  grid-area: nome;
+}
+.view_container .investimento_card .dt_investimento,
+.update_container .investimento_card .dt_investimento,
+.add_meta_container .investimento_card .dt_investimento {
+  grid-area: dt_investimento;
+}
+.view_container .investimento_card .dt_vencimento,
+.update_container .investimento_card .dt_vencimento,
+.add_meta_container .investimento_card .dt_vencimento {
+  grid-area: dt_vencimento;
+}
+.view_container .investimento_card .qtd_cota,
+.update_container .investimento_card .qtd_cota,
+.add_meta_container .investimento_card .qtd_cota {
+  grid-area: qtd_cota;
+}
+.view_container .investimento_card .valor_cota,
+.update_container .investimento_card .valor_cota,
+.add_meta_container .investimento_card .valor_cota {
+  grid-area: valor_cota;
+}
+.view_container .investimento_card .valor_cota input,
+.update_container .investimento_card .valor_cota input,
+.add_meta_container .investimento_card .valor_cota input {
+  padding-left: 1.75rem;
+}
+.view_container .investimento_card .valor_rentabilidade,
+.update_container .investimento_card .valor_rentabilidade,
+.add_meta_container .investimento_card .valor_rentabilidade {
+  grid-area: valor_rentabilidade;
+}
+.view_container .investimento_card .tipo_rentabilidade,
+.update_container .investimento_card .tipo_rentabilidade,
+.add_meta_container .investimento_card .tipo_rentabilidade {
+  grid-area: tipo_rentabilidade;
+}
+.view_container .investimento_card .nm_instituicao,
+.update_container .investimento_card .nm_instituicao,
+.add_meta_container .investimento_card .nm_instituicao {
+  grid-area: nm_instituicao;
+}
+.view_container .investimento_card .tipo,
+.update_container .investimento_card .tipo,
+.add_meta_container .investimento_card .tipo {
+  grid-area: tipo;
+}
+.view_container .investimento_card .status,
+.update_container .investimento_card .status,
+.add_meta_container .investimento_card .status {
+  grid-area: status;
+}
+.view_container .investimento_card .valor_total,
+.update_container .investimento_card .valor_total,
+.add_meta_container .investimento_card .valor_total {
+  grid-area: valor_total;
+}
+.view_container .investimento_card .valor_total input,
+.update_container .investimento_card .valor_total input,
+.add_meta_container .investimento_card .valor_total input {
+  padding-left: 1.75rem;
 }/*# sourceMappingURL=style.css.map */

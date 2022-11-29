@@ -110,7 +110,7 @@
   }
 }
 
-.view, .update{
+.view, .update, .add_meta{
   @include main-container;
 
   &_container{

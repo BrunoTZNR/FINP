@@ -9,6 +9,7 @@
 
   verifyLogin($logout);
 
+  define('ALERT', true);
   define('TITLE', 'LISTAGEM');
 
   $tipo = $_GET['card'];
@@ -17,13 +18,17 @@
   include './includes/header.php';
 ?>
 
+<section class="alert">
+  <p class="alert_text"><?php if (isset($_GET['alert'])) echo messageAlert(clean($_GET['alert'])) ?></p>
+</section>
+
 <main class="listagem">
   <section class="listagem_container">
     <header class="listagem_container_header">
       <h1 class="listagem_title"><?=$tipo?></h1>
 
       <div class="listagem_container_header_acoes">
-        <a class="button" href="#cadastrar?card=<?=$tipo?>">cadastrar</a>
+        <a class="button" href="./create.php?card=<?=$tipo?>">cadastrar</a>
 
         <form method="post">
           <input class="search" type="text" name="search" value="<?php if(isset($search)) echo str_replace('%','',$search);?>">
